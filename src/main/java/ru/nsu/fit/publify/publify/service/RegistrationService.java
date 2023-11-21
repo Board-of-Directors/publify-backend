@@ -1,6 +1,5 @@
 package ru.nsu.fit.publify.publify.service;
 
-import ru.nsu.fit.publify.publify.dto.LoginRequestDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 
 public interface RegistrationService {
