@@ -1,6 +1,9 @@
 package ru.nsu.fit.publify.publify.service;
 
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
+import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
+
+import java.util.List;
 
 public interface RegistrationService {
     /**
@@ -8,5 +11,7 @@ public interface RegistrationService {
      *
      * @param registrationRequestDto запрос на регистрацию
      */
-    void registerOrganization(OrganizationRegistrationRequestDto registrationRequestDto);
+    Long registerOrganization(OrganizationRegistrationRequestDto registrationRequestDto);
+
+    void inviteWorkers(Long organizationId, List<RegistrationWorkerDto> registrationWorkerDtoList);
 }
