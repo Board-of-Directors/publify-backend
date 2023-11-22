@@ -40,4 +40,9 @@ public class JournalServiceImpl implements JournalService {
         journalRepository.save(journal);
 
     }
+
+    @Override
+    public void deleteJournal(Long journalId) {
+        journalRepository.deleteById(journalId);
+    }
 }
