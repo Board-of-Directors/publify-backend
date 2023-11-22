@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionTemplate;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
 import ru.nsu.fit.publify.publify.exception.AlreadyRegisteredException;
@@ -21,15 +22,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class RegistrationServiceImpl implements RegistrationService, UserDetailsService {
     private final OrganizationRepository organizationRepository;
     private final EmployeeMapper employeeMapper;
     private final EmployeeRepository employeeRepository;
     private final EmployeeMailSenderService employeeMailSenderService;
     private final PasswordEncoder passwordEncoder;
+    private final TransactionTemplate transactionTemplate;
 
     @Override
+    @Transactional
     public Long registerOrganization(OrganizationRegistrationRequestDto registrationRequestDto) {
         validate(registrationRequestDto);
         Organization organization = new Organization().setName(registrationRequestDto.organizationName());
@@ -52,11 +54,14 @@ public class RegistrationServiceImpl implements RegistrationService, UserDetails
     }
 
     private void sendEmailAndSave(Employee employee) {
-        String decodedPassword = employee.getPassword();
-        employeeRepository.save(
-            employee.setPassword(passwordEncoder.encode(decodedPassword))
-        );
-        employeeMailSenderService.sendRegistrationEmail(employee.getEmail(), decodedPassword);
+        transactionTemplate.execute((status) -> {
+            String decodedPassword = employee.getPassword();
+            employeeRepository.save(
+                employee.setPassword(passwordEncoder.encode(decodedPassword))
+            );
+            employeeMailSenderService.sendRegistrationEmail(employee.getEmail(), decodedPassword);
+            return null;
+        });
     }
 
     private void validate(OrganizationRegistrationRequestDto registrationRequestDto) {
