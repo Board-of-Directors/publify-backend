@@ -14,7 +14,7 @@ public enum EmployeeRole {
     @Nonnull
     public static EmployeeRole fromString(String role) {
         return Stream.of(values())
-            .filter(roleName -> roleName.name().equals(role))
+            .filter(roleName -> roleName.name().equalsIgnoreCase(role))
             .findFirst()
             .orElseThrow(EmployeeRoleNotFoundException::new);
     }

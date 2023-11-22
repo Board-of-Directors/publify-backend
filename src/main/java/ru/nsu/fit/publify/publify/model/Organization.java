@@ -24,4 +24,6 @@ public class Organization {
     private String name;
     @OneToMany(mappedBy = "organization")
     private List<Employee> workers;
+    @OneToMany(mappedBy = "organization")
+    private List<Journal> journals;
 }

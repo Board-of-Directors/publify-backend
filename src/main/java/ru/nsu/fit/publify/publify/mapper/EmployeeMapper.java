@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import ru.nsu.fit.publify.publify.dto.EmployeeDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
 import ru.nsu.fit.publify.publify.enums.EmployeeRole;
@@ -31,6 +32,11 @@ public class EmployeeMapper {
             .setEmployeeRole(EmployeeRole.fromString(workerDto.role()))
             .setPassword(generatePassword())
             .setOrganization(organization);
+    }
+
+    @Nonnull
+    public EmployeeDto toDto(Employee employee) {
+        return new EmployeeDto(employee.getId(), employee.getEmail());
     }
 
     @Nonnull

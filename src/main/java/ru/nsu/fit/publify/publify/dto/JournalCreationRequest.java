@@ -1,0 +1,17 @@
+package ru.nsu.fit.publify.publify.dto;
+
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
+public record JournalCreationRequest(
+    @NotNull(message = "Название журнала не может быть пустым.")
+    String title,
+    String description,
+    @NotNull(message = "Идентификатор организации не может быть не задан.")
+    Long organizationId,
+    @NotNull(message = "Список сотрудников не может быть не задан.")
+    List<String> employeeEmails
+
+) {
+}
