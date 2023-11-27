@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+  app:
+    container_name: budle
+    image: fagorym/publify:develop
+    volumes:
+      - /home/ubuntu/images:/usr/src/java-app/images
+      - /home/ubuntu/logs:/usr/src/java-app/logs
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresqldb
+    environment:
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://172.17.0.1:5432/publify
+  postgresqldb:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=publify
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"

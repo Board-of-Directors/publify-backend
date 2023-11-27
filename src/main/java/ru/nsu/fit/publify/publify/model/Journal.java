@@ -28,7 +28,7 @@ public class Journal {
     private String description;
     @ManyToOne
     @JoinColumn(name = "organization_id")
-    Organization organization;
+    private Organization organization;
     @ManyToMany
     @JoinTable(
         name = "journal_editors",
