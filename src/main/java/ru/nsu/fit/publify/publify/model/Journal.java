@@ -8,6 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +33,10 @@ public class Journal {
     @ManyToMany
     @JoinTable(
         name = "journal_editors",
-    joinColumns = @JoinColumn(name = "journal_id"),
-    inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    List<Employee> journalEditors;
+        joinColumns = @JoinColumn(name = "journal_id"),
+        inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<Employee> journalEditors;
+    @OneToMany(mappedBy = "journal")
+    private List<Issue> journalIssues;
 }
