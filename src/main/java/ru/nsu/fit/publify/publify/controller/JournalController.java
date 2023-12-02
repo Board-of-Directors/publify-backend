@@ -25,7 +25,7 @@ public class JournalController {
     private final JournalService journalService;
 
     @PostMapping
-    public void create(@RequestBody @Valid JournalCreationRequest journalCreationRequest) {
+    public void createJournal(@RequestBody @Valid JournalCreationRequest journalCreationRequest) {
         journalService.createJournal(journalCreationRequest);
     }
 

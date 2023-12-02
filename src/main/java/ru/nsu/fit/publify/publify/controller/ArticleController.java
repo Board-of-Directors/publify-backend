@@ -14,7 +14,7 @@ import ru.nsu.fit.publify.publify.service.ArticleService;
 public class ArticleController {
     private final ArticleService articleService;
     @PostMapping
-    public void create(@RequestBody ArticleDto articleDto) {
+    public void createArticle(@RequestBody ArticleDto articleDto) {
         articleService.createArticle(articleDto);
     }
 }
