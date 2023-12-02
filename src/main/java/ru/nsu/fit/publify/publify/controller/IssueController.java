@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
+import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.service.IssueService;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class IssueController {
     }
 
     @GetMapping(name = "search")
-    public List<IssueDto> search(@RequestParam Long journalId) {
+    public List<ResponseIssueDto> search(@RequestParam Long journalId) {
         return issueService.findByJournal(journalId);
     }
 }
