@@ -20,7 +20,7 @@ configurations {
 
 
 springBoot {
-	mainClass = "ru.nsu.fit.pak.budle.PublifyApplication"
+	mainClass = "ru.nsu.fit.publify.publify.PublifyApplication"
 }
 
 repositories {
