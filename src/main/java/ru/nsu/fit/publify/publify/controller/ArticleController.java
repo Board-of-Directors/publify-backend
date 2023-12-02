@@ -10,7 +10,7 @@ import ru.nsu.fit.publify.publify.service.ArticleService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "article")
+@RequestMapping(name = "/article")
 public class ArticleController {
     private final ArticleService articleService;
     @PostMapping

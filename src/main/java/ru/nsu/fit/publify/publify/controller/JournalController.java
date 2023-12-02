@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(name = "journal")
+@RequestMapping(name = "/journal")
 public class JournalController {
     private final JournalService journalService;
 

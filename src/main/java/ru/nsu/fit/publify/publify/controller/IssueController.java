@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("issue")
+@RequestMapping("/issue")
 public class IssueController {
     private final IssueService issueService;
 
