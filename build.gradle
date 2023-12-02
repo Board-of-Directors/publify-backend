@@ -18,6 +18,11 @@ configurations {
 	}
 }
 
+
+springBoot {
+	mainClass = "ru.nsu.fit.pak.budle.PublifyApplication"
+}
+
 repositories {
 	mavenCentral()
 }
