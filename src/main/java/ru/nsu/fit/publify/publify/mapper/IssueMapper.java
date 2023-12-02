@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
+import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.model.Issue;
 import ru.nsu.fit.publify.publify.model.Journal;
 import ru.nsu.fit.publify.publify.service.ImageService;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -24,5 +26,20 @@ public class IssueMapper {
             .setCover(imageService.save(cover))
             .setJournal(journal);
 
+    }
+
+    public List<ResponseIssueDto> toDtoList(List<Issue> issues) {
+        return issues.stream()
+            .map(this::toDto)
+            .toList();
+    }
+
+    public ResponseIssueDto toDto(Issue issue) {
+        return ResponseIssueDto.builder()
+            .title(issue.getName())
+            .number(issue.getNumber())
+            .releaseDate(issue.getReleaseDate().toString())
+            .cover(imageService.load(issue.getCover()))
+            .build();
     }
 }

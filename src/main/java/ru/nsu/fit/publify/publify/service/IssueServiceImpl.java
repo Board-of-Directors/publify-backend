@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
+import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.exception.JournalNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.IssueMapper;
 import ru.nsu.fit.publify.publify.model.Journal;
 import ru.nsu.fit.publify.publify.repository.IssueRepository;
 import ru.nsu.fit.publify.publify.repository.JournalRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,5 +31,13 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public void deleteJournalIssue(Long issueId) {
         issueRepository.deleteById(issueId);
+    }
+
+    @Override
+    public List<ResponseIssueDto> findByJournal(Long journalId) {
+        Journal journal = journalRepository.findById(journalId).orElseThrow(
+            () -> new JournalNotFoundException(journalId)
+        );
+        return issueMapper.toDtoList(issueRepository.findAllByJournal(journal));
     }
 }

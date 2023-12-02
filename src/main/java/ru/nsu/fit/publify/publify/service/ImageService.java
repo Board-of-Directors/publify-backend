@@ -7,5 +7,5 @@ import java.io.File;
 public interface ImageService {
     String save(MultipartFile file);
 
-    File load(String path);
+    byte[] load(String path);
 }
