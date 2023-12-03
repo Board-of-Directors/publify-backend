@@ -29,7 +29,7 @@ public class JournalController {
         journalService.createJournal(journalCreationRequest);
     }
 
-    @GetMapping(name = "/search")
+    @GetMapping(value = "/search")
     public List<JournalDto> search(@RequestParam Optional<String> name) {
         return journalService.searchJournal(name.orElse(StringUtils.EMPTY));
     }

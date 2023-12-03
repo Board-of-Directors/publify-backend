@@ -36,7 +36,7 @@ public class IssueController {
         issueService.deleteJournalIssue(issueId);
     }
 
-    @GetMapping(name = "search")
+    @GetMapping(value = "search")
     public List<ResponseIssueDto> search(@RequestParam Long journalId) {
         return issueService.findByJournal(journalId);
     }
