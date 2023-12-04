@@ -1,6 +1,7 @@
 package ru.nsu.fit.publify.publify.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/employee")
+@CrossOrigin(allowCredentials = "true", originPatterns = {"*"})
 public class EmployeeController {
     private final EmployeeService employeeService;
 

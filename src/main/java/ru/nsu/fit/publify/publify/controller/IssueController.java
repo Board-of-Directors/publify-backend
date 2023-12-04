@@ -1,6 +1,7 @@
 package ru.nsu.fit.publify.publify.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/issue")
+@CrossOrigin(allowCredentials = "true", originPatterns = {"*"})
 public class IssueController {
     private final IssueService issueService;
 
