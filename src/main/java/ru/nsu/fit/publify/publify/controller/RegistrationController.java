@@ -40,8 +40,9 @@ public class RegistrationController {
     }
 
     @PostMapping("login")
-    public void login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
+    public Long login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
         securityService.login(loginRequestDto, httpServletRequest);
+        return registrationService.login(loginRequestDto);
 
     }
 }

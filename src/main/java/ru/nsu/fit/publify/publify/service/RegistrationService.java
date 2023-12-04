@@ -1,5 +1,6 @@
 package ru.nsu.fit.publify.publify.service;
 
+import ru.nsu.fit.publify.publify.dto.LoginRequestDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
 
@@ -14,4 +15,6 @@ public interface RegistrationService {
     Long registerOrganization(OrganizationRegistrationRequestDto registrationRequestDto);
 
     void inviteWorkers(Long organizationId, List<RegistrationWorkerDto> registrationWorkerDtoList);
+
+    Long login(LoginRequestDto loginRequestDto);
 }

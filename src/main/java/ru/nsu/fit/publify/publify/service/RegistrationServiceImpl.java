@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
+import ru.nsu.fit.publify.publify.dto.LoginRequestDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
 import ru.nsu.fit.publify.publify.exception.AlreadyRegisteredException;
@@ -50,6 +51,14 @@ public class RegistrationServiceImpl implements RegistrationService, UserDetails
         registrationWorkerDtoList.stream()
             .map(workerDto -> employeeMapper.toWorker(workerDto, organization))
             .forEachOrdered(this::sendEmailAndSave);
+    }
+
+    @Override
+    public Long login(LoginRequestDto loginRequestDto) {
+        return employeeRepository.findEmployeeByEmail(loginRequestDto.login())
+            .orElseThrow(() -> new RuntimeException("Нет подходящего юзера"))
+            .getOrganization()
+            .getId();
     }
 
     private void sendEmailAndSave(Employee employee) {
