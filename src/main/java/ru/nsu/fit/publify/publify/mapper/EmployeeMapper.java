@@ -4,6 +4,7 @@ import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.nsu.fit.publify.publify.dto.EmployeeDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
@@ -15,13 +16,14 @@ import ru.nsu.fit.publify.publify.model.Organization;
 @Component
 @RequiredArgsConstructor
 public class EmployeeMapper {
+    private final PasswordEncoder passwordEncoder;
 
     @Nonnull
     public Employee toOwner(OrganizationRegistrationRequestDto registrationRequestDto, Organization organization) {
         return new Employee()
             .setName(generateFullName(registrationRequestDto.ownerFirstName(), registrationRequestDto.ownerLastName()))
             .setEmail(registrationRequestDto.ownerEmail())
-            .setPassword(generatePassword())
+            .setPassword(passwordEncoder.encode(registrationRequestDto.ownerPassword()))
             .setEmployeeRole(EmployeeRole.OWNER)
             .setOrganization(organization);
     }

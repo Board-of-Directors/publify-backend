@@ -9,6 +9,8 @@ public record OrganizationRegistrationRequestDto(
     String ownerFirstName,
     @NotNull(message = "Фамилия создателя организации не может быть не задана.")
     String ownerLastName,
+    @NotNull(message = "Пароль создателя не может быть не задан.")
+    String ownerPassword,
     @NotNull(message = "Электронная почта создателя организации не может быть не задана.")
     String ownerEmail
 ) {

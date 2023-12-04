@@ -37,8 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService, UserDetails
         Organization organization = new Organization().setName(registrationRequestDto.organizationName());
         organization = organizationRepository.save(organization);
 
-        Employee owner = employeeMapper.toOwner(registrationRequestDto, organization);
-        sendEmailAndSave(owner);
+        employeeRepository.save(employeeMapper.toOwner(registrationRequestDto, organization));
 
         return organization.getId();
     }
