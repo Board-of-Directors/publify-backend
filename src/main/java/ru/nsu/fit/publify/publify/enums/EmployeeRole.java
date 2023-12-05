@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public enum EmployeeRole {
     OWNER,
     EDITOR,
-    AUTHOR,
+    COPYRIGHTER,
     ILLUSTRATOR;
 
     @Nonnull
