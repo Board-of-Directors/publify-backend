@@ -21,28 +21,15 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.nsu.fit.publify.publify.dto.BaseResponse;
-import ru.nsu.fit.publify.publify.exception.AlreadyRegisteredException;
 import ru.nsu.fit.publify.publify.exception.BaseException;
-import ru.nsu.fit.publify.publify.exception.EmployeeRoleNotFoundException;
-import ru.nsu.fit.publify.publify.exception.JournalNotFoundException;
-import ru.nsu.fit.publify.publify.exception.OrganizationNotFoundException;
-import ru.nsu.fit.publify.publify.exception.UserNotLoggedInException;
-import ru.nsu.fit.publify.publify.exception.WorkerNotFoundException;
 
 import java.util.LinkedHashMap;
 
 @RestControllerAdvice(basePackages = "ru.nsu.fit.publify.publify.controller")
 public class AdviceController extends ResponseEntityExceptionHandler implements ResponseBodyAdvice<Object> {
 
-    @ExceptionHandler({
-        AlreadyRegisteredException.class,
-        EmployeeRoleNotFoundException.class,
-        JournalNotFoundException.class,
-        OrganizationNotFoundException.class,
-        UserNotLoggedInException.class,
-        WorkerNotFoundException.class
-    })
-    public <T extends BaseException> ResponseEntity<BaseResponse<Object>> handleException(T exception) {
+    @ExceptionHandler({BaseException.class})
+    public ResponseEntity<BaseResponse<Object>> handleException(BaseException exception) {
         BaseResponse<Object> response = new BaseResponse<>(exception);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
