@@ -4,6 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record ResponseIssueDto(
+    Long id,
     String title,
     Integer number,
     String releaseDate,

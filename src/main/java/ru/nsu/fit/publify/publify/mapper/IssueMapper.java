@@ -36,6 +36,7 @@ public class IssueMapper {
 
     public ResponseIssueDto toDto(Issue issue) {
         return ResponseIssueDto.builder()
+            .id(issue.getId())
             .title(issue.getName())
             .number(issue.getNumber())
             .releaseDate(issue.getReleaseDate().toString())
