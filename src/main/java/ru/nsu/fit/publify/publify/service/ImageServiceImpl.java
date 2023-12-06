@@ -17,8 +17,8 @@ import java.io.OutputStream;
 public class ImageServiceImpl implements ImageService {
     @Override
     public String save(byte[] coverFile, String journalTitle, Integer number) {
-        String filePath = "/images/" + journalTitle + "_" + number;
-        File file = new File(filePath.replace(" ", ""));
+        String filePath = "./" + journalTitle + "_" + number;
+        File file = new File(filePath);
         try {
             boolean success = file.createNewFile();
             log.info("Creation file {} was success = {}", filePath, success);
