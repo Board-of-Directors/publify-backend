@@ -36,7 +36,7 @@ public class JournalServiceImpl implements JournalService {
             .toList();
 
         Journal journal = new Journal()
-            .setTitle(journalCreationRequest.title())
+            .setTitle(journalCreationRequest.name())
             .setDescription(journalCreationRequest.description())
             .setOrganization(organization)
             .setJournalEditors(journalEditors);
@@ -76,7 +76,7 @@ public class JournalServiceImpl implements JournalService {
 
         Journal journal = new Journal()
             .setId(id)
-            .setTitle(journalCreationRequest.title())
+            .setTitle(journalCreationRequest.name())
             .setDescription(journalCreationRequest.description())
             .setJournalEditors(journalEditors);
 
