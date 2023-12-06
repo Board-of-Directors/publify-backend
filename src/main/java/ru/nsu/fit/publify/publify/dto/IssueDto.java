@@ -12,6 +12,8 @@ public record IssueDto(
     String description,
     @NotNull(message = "Номер выпуска не может быть не задан.")
     Integer number,
+    @NotNull(message = "Обложка не может быть не задана.")
+    byte[] cover,
     Optional<LocalDate> releaseDate
 ) {
 }

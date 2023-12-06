@@ -1,11 +1,7 @@
 package ru.nsu.fit.publify.publify.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-
 public interface ImageService {
-    String save(MultipartFile file);
+    String save(byte[] file, String journalTitle, Integer number);
 
     byte[] load(String path);
 }

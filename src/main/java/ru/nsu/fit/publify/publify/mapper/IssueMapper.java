@@ -2,7 +2,6 @@ package ru.nsu.fit.publify.publify.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
 import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.model.Issue;
@@ -18,12 +17,12 @@ import java.util.List;
 public class IssueMapper {
     private final ImageService imageService;
 
-    public Issue toModel(IssueDto issueDto, MultipartFile cover, Journal journal) {
+    public Issue toModel(IssueDto issueDto, Journal journal) {
         return new Issue().setName(issueDto.name())
             .setDescription(issueDto.description())
             .setReleaseDate(Date.valueOf(issueDto.releaseDate().orElse(LocalDate.now())))
             .setNumber(issueDto.number())
-            .setCover(imageService.save(cover))
+            .setCover(imageService.save(issueDto.cover(), journal.getTitle(), issueDto.number()))
             .setJournal(journal);
 
     }

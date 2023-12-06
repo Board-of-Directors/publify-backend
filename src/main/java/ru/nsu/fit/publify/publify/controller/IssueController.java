@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
 import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.service.IssueService;
@@ -27,10 +25,9 @@ public class IssueController {
     @PostMapping
     public void create(
         @RequestParam Long journalId,
-        @RequestBody IssueDto issueDto,
-        @RequestPart MultipartFile cover
+        @RequestBody IssueDto issueDto
     ) {
-        issueService.createJournalIssue(journalId, issueDto, cover);
+        issueService.createJournalIssue(journalId, issueDto);
     }
 
     @DeleteMapping

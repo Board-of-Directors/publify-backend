@@ -2,7 +2,6 @@ package ru.nsu.fit.publify.publify.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
 import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.exception.JournalNotFoundException;
@@ -21,11 +20,11 @@ public class IssueServiceImpl implements IssueService {
     private final IssueMapper issueMapper;
 
     @Override
-    public void createJournalIssue(Long journalId, IssueDto issueDto, MultipartFile cover) {
+    public void createJournalIssue(Long journalId, IssueDto issueDto) {
         Journal journal = journalRepository.findById(journalId).orElseThrow(
             () -> new JournalNotFoundException(journalId)
         );
-        issueRepository.save(issueMapper.toModel(issueDto, cover, journal));
+        issueRepository.save(issueMapper.toModel(issueDto, journal));
     }
 
     @Override
