@@ -19,10 +19,12 @@ public class ImageServiceImpl implements ImageService {
     public String save(byte[] coverFile, String journalTitle, Integer number) {
         String filePath = "/images/" + journalTitle + "_" + number;
         File file = new File(filePath.replace(" ", ""));
-        try (OutputStream os = new FileOutputStream(file)) {
+        try {
             boolean success = file.createNewFile();
-            log.info("Creation file was success = {}", success);
-            os.write(coverFile);
+            log.info("Creation file {} was success = {}", filePath, success);
+            try (OutputStream os = new FileOutputStream(file)) {
+                os.write(coverFile);
+            }
         } catch (IOException ex) {
             throw new RuntimeException(ex.getMessage());
         }
