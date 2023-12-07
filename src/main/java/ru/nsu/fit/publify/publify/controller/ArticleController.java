@@ -1,5 +1,6 @@
 package ru.nsu.fit.publify.publify.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import ru.nsu.fit.publify.publify.service.ArticleService;
 public class ArticleController {
     private final ArticleService articleService;
     @PostMapping
-    public void createArticle(@RequestBody ArticleDto articleDto) {
+    public void createArticle(@RequestBody @Valid ArticleDto articleDto) {
         articleService.createArticle(articleDto);
     }
 }

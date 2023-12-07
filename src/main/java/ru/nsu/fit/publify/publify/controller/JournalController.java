@@ -39,7 +39,7 @@ public class JournalController {
     @PutMapping
     public JournalDto change(
         @RequestParam Long id,
-        @RequestBody JournalCreationRequest journalCreationRequest
+        @RequestBody @Valid JournalCreationRequest journalCreationRequest
     ) {
         return journalService.changeJournal(id, journalCreationRequest);
     }

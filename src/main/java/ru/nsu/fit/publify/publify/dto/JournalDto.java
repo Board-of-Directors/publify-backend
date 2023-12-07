@@ -8,7 +8,7 @@ import java.util.List;
 public record JournalDto(
     Long id,
     String name,
-    List<String> employeeEmail,
+    List<String> employeeEmails,
     Integer issueCount,
     Integer workerCount,
     String description

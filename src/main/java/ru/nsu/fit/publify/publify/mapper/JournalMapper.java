@@ -18,7 +18,7 @@ public class JournalMapper {
             .name(journal.getTitle())
             .description(journal.getDescription())
             .issueCount(journal.getJournalIssues().size())
-            .employeeEmail(journal.getJournalEditors().stream().map(Employee::getEmail).toList())
+            .employeeEmails(journal.getJournalEditors().stream().map(Employee::getEmail).toList())
             .workerCount(journal.getJournalEditors().size())
             .build();
     }

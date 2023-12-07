@@ -1,5 +1,6 @@
 package ru.nsu.fit.publify.publify.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +26,7 @@ public class IssueController {
     @PostMapping
     public void create(
         @RequestParam Long journalId,
-        @RequestBody IssueDto issueDto
+        @RequestBody @Valid IssueDto issueDto
     ) {
         issueService.createJournalIssue(journalId, issueDto);
     }
