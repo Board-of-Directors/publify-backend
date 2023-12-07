@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,7 +37,7 @@ public class Journal {
         joinColumns = @JoinColumn(name = "journal_id"),
         inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
-    private List<Employee> journalEditors;
+    private List<Employee> journalEditors = new ArrayList<>();
     @OneToMany(mappedBy = "journal")
-    private List<Issue> journalIssues;
+    private List<Issue> journalIssues = new ArrayList<>();
 }

@@ -26,7 +26,8 @@ public class ImageServiceImpl implements ImageService {
                 os.write(coverFile);
             }
         } catch (IOException ex) {
-            throw new RuntimeException(ex.getMessage());
+            log.error(ex.getMessage());
+            return null;
         }
         return filePath;
     }

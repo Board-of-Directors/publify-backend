@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class Organization {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "organization")
-    private List<Employee> workers;
+    private List<Employee> workers = new ArrayList<>();
     @OneToMany(mappedBy = "organization")
-    private List<Journal> journals;
+    private List<Journal> journals = new ArrayList<>();
 }
