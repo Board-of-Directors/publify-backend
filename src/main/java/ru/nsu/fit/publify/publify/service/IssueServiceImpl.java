@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.publify.publify.dto.IssueDto;
 import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
-import ru.nsu.fit.publify.publify.exception.JournalNotFoundException;
+import ru.nsu.fit.publify.publify.enums.EntityType;
+import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.IssueMapper;
 import ru.nsu.fit.publify.publify.model.Journal;
 import ru.nsu.fit.publify.publify.repository.IssueRepository;
@@ -22,7 +23,7 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public void createJournalIssue(Long journalId, IssueDto issueDto) {
         Journal journal = journalRepository.findById(journalId).orElseThrow(
-            () -> new JournalNotFoundException(journalId)
+            () -> new EntityNotFoundException(EntityType.JOURNAL, journalId)
         );
         issueRepository.save(issueMapper.toModel(issueDto, journal));
     }
@@ -35,7 +36,7 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public List<ResponseIssueDto> findByJournal(Long journalId) {
         Journal journal = journalRepository.findById(journalId).orElseThrow(
-            () -> new JournalNotFoundException(journalId)
+            () -> new EntityNotFoundException(EntityType.JOURNAL, journalId)
         );
         return issueMapper.toDtoList(issueRepository.findAllByJournal(journal));
     }

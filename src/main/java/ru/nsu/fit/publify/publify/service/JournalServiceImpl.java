@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.publify.publify.dto.JournalCreationRequest;
 import ru.nsu.fit.publify.publify.dto.JournalDto;
-import ru.nsu.fit.publify.publify.exception.JournalNotFoundException;
-import ru.nsu.fit.publify.publify.exception.OrganizationNotFoundException;
+import ru.nsu.fit.publify.publify.enums.EntityType;
+import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.exception.WorkerNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.JournalMapper;
 import ru.nsu.fit.publify.publify.model.Employee;
@@ -28,7 +28,7 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public void createJournal(JournalCreationRequest journalCreationRequest) {
         Organization organization = organizationRepository.findById(journalCreationRequest.organizationId())
-            .orElseThrow(() -> new OrganizationNotFoundException(journalCreationRequest.organizationId()));
+            .orElseThrow(() -> new EntityNotFoundException(EntityType.ORGANIZATION, journalCreationRequest.organizationId()));
 
         List<Employee> journalEditors = journalCreationRequest.employeeEmails().stream()
             .map(employeeRepository::findEmployeeByEmail)
@@ -58,7 +58,7 @@ public class JournalServiceImpl implements JournalService {
     @Override
     public JournalDto getById(Long id) {
         Journal journal = journalRepository.findById(id).orElseThrow(
-            () -> new JournalNotFoundException(id)
+            () -> new EntityNotFoundException(EntityType.JOURNAL, id)
         );
 
         return journalMapper.toDto(journal);

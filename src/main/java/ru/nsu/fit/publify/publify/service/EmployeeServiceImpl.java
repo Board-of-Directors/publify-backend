@@ -4,7 +4,8 @@ import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nsu.fit.publify.publify.dto.EmployeeDto;
-import ru.nsu.fit.publify.publify.exception.OrganizationNotFoundException;
+import ru.nsu.fit.publify.publify.enums.EntityType;
+import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.EmployeeMapper;
 import ru.nsu.fit.publify.publify.model.Organization;
 import ru.nsu.fit.publify.publify.repository.EmployeeRepository;
@@ -23,7 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Nonnull
     public List<EmployeeDto> findEmployeesByOrganization(Long organizationId) {
         Organization organization = organizationRepository.findById(organizationId)
-            .orElseThrow(() -> new OrganizationNotFoundException(organizationId));
+            .orElseThrow(() -> new EntityNotFoundException(EntityType.ORGANIZATION, organizationId));
         return employeeRepository.findEmployeeByOrganization(organization)
             .stream()
             .map(employeeMapper::toDto)

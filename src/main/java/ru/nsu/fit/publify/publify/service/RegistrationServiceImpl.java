@@ -11,8 +11,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 import ru.nsu.fit.publify.publify.dto.LoginRequestDto;
 import ru.nsu.fit.publify.publify.dto.OrganizationRegistrationRequestDto;
 import ru.nsu.fit.publify.publify.dto.RegistrationWorkerDto;
+import ru.nsu.fit.publify.publify.enums.EntityType;
 import ru.nsu.fit.publify.publify.exception.AlreadyRegisteredException;
-import ru.nsu.fit.publify.publify.exception.OrganizationNotFoundException;
+import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.EmployeeMapper;
 import ru.nsu.fit.publify.publify.model.Employee;
 import ru.nsu.fit.publify.publify.model.Organization;
@@ -46,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService, UserDetails
     @Override
     public void inviteWorkers(Long organizationId, List<RegistrationWorkerDto> registrationWorkerDtoList) {
         Organization organization = organizationRepository.findById(organizationId)
-            .orElseThrow(() -> new OrganizationNotFoundException(organizationId));
+            .orElseThrow(() -> new EntityNotFoundException(EntityType.ORGANIZATION, organizationId));
 
         registrationWorkerDtoList.stream()
             .map(workerDto -> employeeMapper.toWorker(workerDto, organization))
