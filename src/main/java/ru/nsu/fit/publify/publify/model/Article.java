@@ -1,6 +1,7 @@
 package ru.nsu.fit.publify.publify.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +12,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.BatchSize;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +31,7 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "issue_id")
     private Issue issue;
-    @OneToMany(mappedBy = "article")
-    private List<ArticleItem> articleItem;
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
+    @BatchSize(size = 100)
+    private List<ArticleItem> articleItem = new ArrayList<>();
 }

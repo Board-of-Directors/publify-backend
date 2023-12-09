@@ -4,6 +4,7 @@ import jakarta.annotation.Nonnull;
 import org.springframework.stereotype.Component;
 import ru.nsu.fit.publify.publify.dto.ArticleDto;
 import ru.nsu.fit.publify.publify.dto.ArticleItemDto;
+import ru.nsu.fit.publify.publify.dto.ResponseArticleDto;
 import ru.nsu.fit.publify.publify.enums.ContentType;
 import ru.nsu.fit.publify.publify.model.Article;
 import ru.nsu.fit.publify.publify.model.ArticleItem;
@@ -36,5 +37,22 @@ public class ArticleMapper {
             .contentType(articleItem.getContentType().name())
             .sequenceNumber(articleItem.getSequenceNumber())
             .build();
+    }
+
+    @Nonnull
+    public ResponseArticleDto toDto(Article article) {
+        return ResponseArticleDto.builder()
+            .name(article.getName())
+            .description(article.getDescription())
+            .textBlocksCount(getItemCountByType(article, ContentType.TEXT))
+            .illustrationBlocksCount(getItemCountByType(article, ContentType.IMAGE))
+            .build();
+    }
+
+    private long getItemCountByType(Article article, ContentType contentType) {
+        return article.getArticleItem().stream()
+            .filter(item -> item.getContentType() == contentType)
+            .count();
+
     }
 }

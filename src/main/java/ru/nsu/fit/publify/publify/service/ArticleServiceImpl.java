@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.nsu.fit.publify.publify.dto.ArticleDto;
 import ru.nsu.fit.publify.publify.dto.ArticleItemDto;
+import ru.nsu.fit.publify.publify.dto.ResponseArticleDto;
 import ru.nsu.fit.publify.publify.enums.EntityType;
 import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.ArticleMapper;
@@ -60,5 +61,18 @@ public class ArticleServiceImpl implements ArticleService {
             .map(articleMapper::toDto)
             .toList();
 
+    }
+
+    @Override
+    public ResponseArticleDto getArticle(Long articleId) {
+        return articleMapper.toDto(
+            articleRepository.findById(articleId)
+                .orElseThrow(() -> new EntityNotFoundException(EntityType.ARTICLE, articleId))
+        );
+    }
+
+    @Override
+    public void deleteArticle(Long articleId) {
+        articleRepository.deleteById(articleId);
     }
 }

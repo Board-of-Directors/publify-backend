@@ -1,7 +1,9 @@
 package ru.nsu.fit.publify.publify.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 
+@Builder
 public record ArticleDto(
     @NotNull(message = "Название статьи не может быть не задано.")
     String name,

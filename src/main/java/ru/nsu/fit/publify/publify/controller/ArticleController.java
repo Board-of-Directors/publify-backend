@@ -3,6 +3,7 @@ package ru.nsu.fit.publify.publify.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nsu.fit.publify.publify.dto.ArticleDto;
 import ru.nsu.fit.publify.publify.dto.ArticleItemDto;
+import ru.nsu.fit.publify.publify.dto.ResponseArticleDto;
 import ru.nsu.fit.publify.publify.service.ArticleService;
 
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
 public class ArticleController {
     private final ArticleService articleService;
 
-    @GetMapping
+    @GetMapping(value = "/items")
     public List<ArticleItemDto> getArticleItems(
         @RequestParam Long articleId
     ) {
@@ -35,7 +37,17 @@ public class ArticleController {
         articleService.createArticle(articleDto);
     }
 
-    @PutMapping
+    @DeleteMapping
+    public void deleteArticle(@RequestParam Long articleId) {
+        articleService.deleteArticle(articleId);
+    }
+
+    @GetMapping
+    public ResponseArticleDto get(@RequestParam Long articleId){
+        return articleService.getArticle(articleId);
+    }
+
+    @PutMapping(value = "/items")
     public void updateArticleItems(
         @RequestParam Long articleId,
         @RequestBody @Valid List<ArticleItemDto> articleItemDtoList
