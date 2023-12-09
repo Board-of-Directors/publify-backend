@@ -7,6 +7,7 @@ import ru.nsu.fit.publify.publify.dto.ResponseIssueDto;
 import ru.nsu.fit.publify.publify.enums.EntityType;
 import ru.nsu.fit.publify.publify.exception.EntityNotFoundException;
 import ru.nsu.fit.publify.publify.mapper.IssueMapper;
+import ru.nsu.fit.publify.publify.model.Issue;
 import ru.nsu.fit.publify.publify.model.Journal;
 import ru.nsu.fit.publify.publify.repository.IssueRepository;
 import ru.nsu.fit.publify.publify.repository.JournalRepository;
@@ -39,5 +40,16 @@ public class IssueServiceImpl implements IssueService {
             () -> new EntityNotFoundException(EntityType.JOURNAL, journalId)
         );
         return issueMapper.toDtoList(issueRepository.findAllByJournal(journal));
+    }
+
+    @Override
+    public void updateIssue(Long issueId, IssueDto issueDto) {
+        Issue issue = issueRepository.findById(issueId)
+            .orElseThrow(() -> new EntityNotFoundException(EntityType.ISSUE, issueId));
+
+        issueRepository.save(
+            issueMapper.toModel(issueDto, issue.getJournal())
+                .setId(issue.getId())
+        );
     }
 }

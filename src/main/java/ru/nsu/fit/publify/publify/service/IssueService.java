@@ -11,4 +11,6 @@ public interface IssueService {
     void deleteJournalIssue(Long issueId);
 
     List<ResponseIssueDto> findByJournal(Long journalId);
+
+    void updateIssue(Long issueId, IssueDto issueDto);
 }
