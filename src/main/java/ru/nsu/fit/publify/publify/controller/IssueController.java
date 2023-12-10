@@ -49,4 +49,9 @@ public class IssueController {
     public List<ResponseIssueDto> search(@RequestParam Long journalId) {
         return issueService.findByJournal(journalId);
     }
+
+    @GetMapping
+    public ResponseIssueDto get(@RequestParam Long issueId){
+        return issueService.findIssueById(issueId);
+    }
 }

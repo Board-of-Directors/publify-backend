@@ -52,4 +52,12 @@ public class IssueServiceImpl implements IssueService {
                 .setId(issue.getId())
         );
     }
+
+    @Override
+    public ResponseIssueDto findIssueById(Long issueId) {
+        return issueMapper.toDto(issueRepository.findById(issueId).orElseThrow(
+                () -> new EntityNotFoundException(EntityType.ISSUE, issueId)
+            )
+        );
+    }
 }

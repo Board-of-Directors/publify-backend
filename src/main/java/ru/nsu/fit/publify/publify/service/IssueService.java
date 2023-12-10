@@ -13,4 +13,6 @@ public interface IssueService {
     List<ResponseIssueDto> findByJournal(Long journalId);
 
     void updateIssue(Long issueId, IssueDto issueDto);
+
+    ResponseIssueDto findIssueById(Long issueId);
 }
