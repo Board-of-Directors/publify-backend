@@ -42,6 +42,7 @@ public class ArticleMapper {
     @Nonnull
     public ResponseArticleDto toDto(Article article) {
         return ResponseArticleDto.builder()
+            .id(article.getId())
             .name(article.getName())
             .description(article.getDescription())
             .textBlocksCount(getItemCountByType(article, ContentType.TEXT))

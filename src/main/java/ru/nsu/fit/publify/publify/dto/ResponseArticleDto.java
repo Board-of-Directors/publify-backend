@@ -4,6 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record ResponseArticleDto(
+    Long id,
     String name,
     String description,
     Long textBlocksCount,
