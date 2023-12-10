@@ -38,7 +38,8 @@ public class ImageServiceImpl implements ImageService {
         try (InputStream inputStream = new FileInputStream(file)) {
             return inputStream.readAllBytes();
         } catch (IOException ex) {
-            throw new RuntimeException(ex.getMessage());
+            log.warn(ex.getMessage());
+            return null;
         }
     }
 }
