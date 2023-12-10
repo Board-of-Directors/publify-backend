@@ -16,4 +16,6 @@ public interface ArticleService {
     ResponseArticleDto getArticle(Long articleId);
 
     void deleteArticle(Long articleId);
+
+    List<ResponseArticleDto> searchByIssueId(Long issueId);
 }

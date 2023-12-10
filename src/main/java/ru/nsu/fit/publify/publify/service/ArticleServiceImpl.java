@@ -50,7 +50,6 @@ public class ArticleServiceImpl implements ArticleService {
 
         articleItemRepository.saveAll(items);
 
-
     }
 
     @Override
@@ -74,5 +73,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void deleteArticle(Long articleId) {
         articleRepository.deleteById(articleId);
+    }
+
+    @Override
+    public List<ResponseArticleDto> searchByIssueId(Long issueId) {
+        return articleRepository.findAllByIssue(
+                issueRepository.findById(issueId).orElseThrow(
+                    () -> new EntityNotFoundException(EntityType.ISSUE, issueId)
+                )
+            ).stream()
+            .map(articleMapper::toDto)
+            .toList();
+
     }
 }

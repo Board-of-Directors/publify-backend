@@ -42,6 +42,11 @@ public class ArticleController {
         articleService.deleteArticle(articleId);
     }
 
+    @GetMapping(value = "/search")
+    public List<ResponseArticleDto> search(@RequestParam Long issueId){
+        return articleService.searchByIssueId(issueId);
+    }
+
     @GetMapping
     public ResponseArticleDto get(@RequestParam Long articleId){
         return articleService.getArticle(articleId);
