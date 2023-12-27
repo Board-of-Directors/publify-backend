@@ -1,5 +1,6 @@
 package ru.nsu.fit.publify.publify.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,6 +39,6 @@ public class Journal {
         inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
     private List<Employee> journalEditors = new ArrayList<>();
-    @OneToMany(mappedBy = "journal")
+    @OneToMany(mappedBy = "journal", cascade = CascadeType.ALL)
     private List<Issue> journalIssues = new ArrayList<>();
 }

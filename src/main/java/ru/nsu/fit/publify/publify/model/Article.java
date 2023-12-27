@@ -1,5 +1,6 @@
 package ru.nsu.fit.publify.publify.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "issue_id")
     private Issue issue;
-    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @BatchSize(size = 100)
     private List<ArticleItem> articleItem = new ArrayList<>();
 }
